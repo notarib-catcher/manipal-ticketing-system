@@ -1,3 +1,4 @@
 import { writable } from 'svelte/store';
 
-export const deetstore = writable([null,null]);
+export const deetstore = writable([null,null,null]);
+export const kioskID = writable("")

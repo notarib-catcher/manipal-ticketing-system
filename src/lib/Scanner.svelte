@@ -16,6 +16,7 @@ const startScan = async () => {
     return
   }
   document.getElementById("scanbtn").hidden = true
+  document.getElementById("stopscanbtn").hidden = false
   document.getElementById("output").hidden = true
   document.getElementById("scannerbars").hidden = false
 
@@ -38,19 +39,31 @@ const startScan = async () => {
 
     document.getElementById("scanbtn").hidden = false
     document.getElementById("output").hidden = false
+    document.getElementById("stopscanbtn").hidden = true
     document.getElementById("output").innerText = "Scanned: " + result.content
   }
 };
+
+const stopScanClick = async() => {
+  BarcodeScanner.stopScan()
+  document.getElementById("scanbtn").innerText = "EXITED"
+  document.getElementById("scannerbars").hidden = true
+  document.getElementById("scanbtn").hidden = false
+  document.getElementById("output").hidden = false
+  document.getElementById("stopscanbtn").hidden = true
+}
 
 </script>
 
 <div>
   <div id = "output" class=" bg-green-300 w-screen"></div>
   <div id = "scannerbars" class="z-0" hidden>
-    <div class="w-[25%] fixed left-0 bg-black h-screen"></div>
-    <div class="w-[25%] fixed right-0 bg-black h-screen"></div>
-    <div class="h-[30%] fixed top-0 bg-black w-screen"></div>
-    <div class="h-[30%] fixed bottom-0 bg-black w-screen text-white text-center font-semibold">Show ticket QR</div>
+    <div class="w-[15%] fixed left-0 bg-black h-screen"></div>
+    <div class="w-[15%] fixed right-0 bg-black h-screen"></div>
+    <div class="h-[15%] fixed top-0 bg-black w-screen"></div>
+    <div class="h-[15%] fixed bottom-0 bg-black w-screen text-white text-center font-semibold">Show ticket QR</div>
   </div>
   <button id = "scanbtn" class="h-10 w-screen bg-slate-600 text-white" on:click={startScan}>Start Scan</button>
+  <button id = "stopscanbtn" class="h-10  fixed bottom-5 w-screen bg-slate-600 text-white" on:click={stopScanClick} hidden>Exit</button>
+
 </div>
