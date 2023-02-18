@@ -2,5 +2,10 @@
   "appId": "in.mitblrfest.ticketing",
   "appName": "manipal-ticketing-client",
   "webDir": "dist",
-  "bundledWebRuntime": false
+  "bundledWebRuntime": false,
+  "plugins": {
+    "CapacitorHttp": {
+      "enabled": true
+    }
+  }
 }
