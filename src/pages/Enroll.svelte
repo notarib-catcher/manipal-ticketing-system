@@ -1,8 +1,8 @@
 <script>
     import { Preferences } from '@capacitor/preferences';
     import { CapacitorHttp } from '@capacitor/core';
-    import { deetstore } from "../lib/deets";
-    import {kioskID} from "../lib/deets"
+    import { deetstore, kioskName, serverIP } from "../lib/deets";
+    import {kioskTKN} from "../lib/deets"
     var firstrun = true
     const enroll = async () => {
         console.log("IN")
@@ -15,7 +15,16 @@
     const checkstorage = async () => {
       let token = await Preferences.get({key:"token"})
       if(token.value){
-        kioskID.set(token.value)
+        kioskTKN.set(token.value)
+      }
+
+      let name = await Preferences.get({key:"name"})
+      if(name.value){
+        kioskName.set(name.value)
+      }
+      let sip = await Preferences.get({key:"serverIP"})
+      if(sip.value){
+        serverIP.set(sip.value)
       }
     }
 
@@ -38,9 +47,20 @@
       try{
 
           let resinit = await CapacitorHttp.get({
-            url: prefix + ip
+            url: prefix + ip,
+            method: "GET",
+            responseType: "text",
           }) 
-          document.getElementById("status").innerText += resinit.data
+
+          if(!resinit.data.toString().includes("MPTKT")){
+            document.getElementById("status").innerText = "No running server found" + resinit.data
+            return
+          }
+          else{
+            await Preferences.set({key:"serverIP",value:prefix+ip})
+            serverIP.set(prefix+ip)
+          }
+
           let response = await CapacitorHttp.post({
             url: prefix + ip+ "/enroll",
             data: JSON.stringify({
@@ -57,9 +77,9 @@
 
           // @ts-ignore
           if(!response.data){
-            document.getElementById("status").innerText += "An error occured"
+            document.getElementById("status").innerText += "ERR empty response"
           // @ts-ignore
-          document.getElementById("enrollbtn").disabled = false
+            document.getElementById("enrollbtn").disabled = false
             return
           }
           // @ts-ignore
@@ -67,16 +87,16 @@
           // @ts-ignore
 
           if(response.status != 200){
-            document.getElementById("status").innerText += " then status " + response.status
+            document.getElementById("status").innerText = "Failed with status " + response.status
             // @ts-ignore
             document.getElementById("enrollbtn").disabled = false
             return
           }
           else{
             await Preferences.set({key:"token",value:response.data})
-
-            kioskID.set(response.data)
-            document.getElementById("status").innerText = " SUCCESS! TOKEN ASSIGNED! " + response.data
+            await Preferences.set({key:"name",value:name})
+            kioskName.set(name)
+            kioskTKN.set(response.data)
           }
         }
       catch(error){
