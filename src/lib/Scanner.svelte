@@ -28,6 +28,7 @@ const startScan = async () => {
   // make background of WebView transparent
   // note: if you are using ionic this might not be enough, check below
   document.getElementById("scanbtn").innerText = "Start scan"
+  cscanstate.set([null,null,"fail"])
   await BarcodeScanner.hideBackground();
 
   const result = await BarcodeScanner.startScan({ targetedFormats: [SupportedFormat.QR_CODE] }); // start scanning and wait for a result
