@@ -11,10 +11,10 @@
 
     serverIP.subscribe(updateserverIP)
     let srvip
-    let error401 = false
-    let error403 = false
+    let errorinres = false
     let validconfirm = false
     let resreason = ""
+    let rescode = ""
 
     let show = false
     let missingfieldsinvalid = false
@@ -38,8 +38,8 @@
         }
 
         missingfieldsinvalid = false
-        error401 = false
-        error403 = false
+        errorinres = false
+
         validconfirm = false
         // TODO: add event
 
@@ -58,20 +58,17 @@
 
         document.getElementById("output").innerText = ""
         
-
-        // @ts-ignore
-        if(initres.status == 401){
-            error401 = true
-        }
-
-        // @ts-ignore
-        if(initres.status == 403){
-            error403 = true
-        }
-
         // @ts-ignore
         if(initres.status == 200){
+            // @ts-ignore
+            rescode = initres.status
             validconfirm = true
+        }
+        // @ts-ignore
+        else{
+            // @ts-ignore
+            rescode = initres.status
+            errorinres = true        
         }
         // @ts-ignore
         resreason = initres.data
@@ -93,19 +90,14 @@
             QR is invalid (Missing data) 
             </div>
         {/if}
-        {#if error403}
+        {#if errorinres}
             <div class=" w-screen bg-red-400">
-            ERROR: 403<br>{resreason}
-            </div>
-        {/if}
-        {#if error401}
-            <div class=" w-screen bg-red-400">
-            ERROR: 401<br>{resreason}
+            [{rescode}]: {resreason}
             </div>
         {/if}
         {#if validconfirm}
             <div class=" w-screen bg-green-400">
-                {resreason}
+            [{rescode}]: {resreason}
             </div>
         {/if}
         <div>
