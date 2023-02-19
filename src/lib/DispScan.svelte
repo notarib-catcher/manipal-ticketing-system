@@ -59,17 +59,21 @@
         document.getElementById("output").innerText = ""
         
 
+        // @ts-ignore
         if(initres.status == 401){
             error401 = true
         }
 
+        // @ts-ignore
         if(initres.status == 403){
             error403 = true
         }
 
+        // @ts-ignore
         if(initres.status == 200){
             validconfirm = true
         }
+        // @ts-ignore
         resreason = initres.data
         }
         catch(error){
