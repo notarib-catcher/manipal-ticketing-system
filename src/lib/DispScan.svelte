@@ -51,6 +51,7 @@
             document.getElementById("output").innerText = "error during HTTP request"
         })
 
+        // @ts-ignore
         if(!initres.data){
             document.getElementById("output").innerText = "error during HTTP request"
         }
@@ -82,35 +83,34 @@
 </script>
 
 <div id="scanned-output-wrapper">
-    {#if missingfieldsinvalid}
-    <div class=" w-screen bg-red-400">
-       QR is invalid (Missing data) 
-    </div>
-    {/if}
-    {#if error403}
-    <div class=" w-screen bg-red-400">
-       ERROR: 403<br>{resreason}
-    </div>
-    {/if}
-    {#if error401}
-    <div class=" w-screen bg-red-400">
-       ERROR: 401<br>{resreason}
-    </div>
-    {/if}
-    {#if validconfirm}
-    <div class=" w-screen bg-green-400">
-        {resreason}
-    </div>
-    {/if}
-
     {#if show}
-    <div>
-        <b>{JSONobj._id}</b>
-        <ul>
-            <li>Name: {JSONobj.name}</li>
-            <li>Phone: {JSONobj.phone}</li>
-            <li>Type: {JSONobj.type}</li>
-        </ul>
-    </div>
+        {#if missingfieldsinvalid}
+            <div class=" w-screen bg-red-400">
+            QR is invalid (Missing data) 
+            </div>
+        {/if}
+        {#if error403}
+            <div class=" w-screen bg-red-400">
+            ERROR: 403<br>{resreason}
+            </div>
+        {/if}
+        {#if error401}
+            <div class=" w-screen bg-red-400">
+            ERROR: 401<br>{resreason}
+            </div>
+        {/if}
+        {#if validconfirm}
+            <div class=" w-screen bg-green-400">
+                {resreason}
+            </div>
+        {/if}
+        <div>
+            <b>{JSONobj._id}</b>
+            <ul>
+                <li>Name: {JSONobj.name}</li>
+                <li>Phone: {JSONobj.phone}</li>
+                <li>Type: {JSONobj.type}</li>
+            </ul>
+        </div>
     {/if}
 </div>
