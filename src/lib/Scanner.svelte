@@ -94,10 +94,13 @@ const stopScanClick = async() => {
   <div id = "scannerbars" class="z-0" hidden>
     <div class="w-[15%] fixed left-0 bg-black h-screen"></div>
     <div class="w-[15%] fixed right-0 bg-black h-screen"></div>
-    <div class="h-[15%] fixed top-0 bg-black w-screen"></div>
-    <div class="h-[15%] fixed bottom-0 bg-black w-screen text-white text-center font-semibold">Show ticket QR</div>
+    <div class="h-[35%] fixed top-0 bg-black w-screen"></div>
+    <div class="h-[35%] fixed bottom-0 bg-black w-screen text-white text-center font-semibold">Show ticket QR<br>If QR isn't focusing<br>try centering it,<br>moving closer or farther,<br>or exiting and restarting the scan.<br></div>
   </div>
   <button id = "scanbtn" class="h-10 w-screen bg-slate-600 text-white" on:click={startScan}>Start Scan</button>
-  <button id = "stopscanbtn" class="h-10  z-20 fixed bottom-5 w-screen bg-slate-600 text-white" on:click={stopScanClick} hidden>Exit</button>
+  <div class=" fixed left-0 bottom-0 block w-screen">
+    <button id = "stopscanbtn" class="h-10 rounded-lg  translate-x-[5%] z-20 fixed bottom-5 w-[90%] m-auto bg-slate-600 text-white" on:click={stopScanClick} hidden>Exit</button>
+  </div>
+  
 
 </div>
