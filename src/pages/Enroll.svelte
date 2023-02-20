@@ -1,7 +1,7 @@
 <script>
     import { Preferences } from '@capacitor/preferences';
     import { CapacitorHttp } from '@capacitor/core';
-    import { tempinputstore, kioskName, serverIP, kioskassignment, doassignmentagain } from "../lib/deets";
+    import { tempinputstore, kioskName, serverIP, kioskassignment, doassignmentagain, doenrollmentagain } from "../lib/deets";
     import {kioskTKN} from "../lib/deets"
     var firstrun = true
 
@@ -45,7 +45,7 @@
               Preferences.set({key:"assignment",value:assignmentres.data})
             }
             else if(assignmentres.status == 404 || assignmentres.status == 401 || assignmentres.status == 409){
-              //unenroll
+              doenrollmentagain.set(true)
             }
     }
 
