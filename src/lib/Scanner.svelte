@@ -20,6 +20,7 @@ const startScan = async () => {
   document.getElementById("stopscanbtn").hidden = false
   document.getElementById("output").hidden = true
   document.getElementById("scannerbars").hidden = false
+  document.getElementById("misc-out").hidden = true
 
   // Check camera permission
   // This is just a simple example, check out the better checks below
@@ -37,6 +38,7 @@ const startScan = async () => {
   if (result.hasContent) {
     await BarcodeScanner.stopScan()
     await BarcodeScanner.showBackground()
+    document.getElementById("misc-out").hidden = false
 
     document.getElementById("scannerbars").hidden = true
 
@@ -77,6 +79,7 @@ const scanCompleted = async (encoded) => {
 
 const stopScanClick = async() => {
   BarcodeScanner.stopScan()
+  document.getElementById("misc-out").hidden = false
   document.getElementById("scanbtn").innerText = "Start scan (Previous scan aborted)"
   document.getElementById("scannerbars").hidden = true
   document.getElementById("scanbtn").hidden = false

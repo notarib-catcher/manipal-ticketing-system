@@ -1,22 +1,57 @@
 <script>
     import { Preferences } from '@capacitor/preferences';
     import { CapacitorHttp } from '@capacitor/core';
-    import { deetstore, kioskName, serverIP } from "../lib/deets";
+    import { tempinputstore, kioskName, serverIP, kioskassignment, doassignmentagain } from "../lib/deets";
     import {kioskTKN} from "../lib/deets"
     var firstrun = true
+
     const enroll = async () => {
         console.log("IN")
         // @ts-ignore
         document.getElementById("enrollbtn").disabled = true
         // @ts-ignore
-        deetstore.set([document.getElementById("IP").value,document.getElementById("CODE").value,null])
+        tempinputstore.set([document.getElementById("IP").value,document.getElementById("CODE").value,null])
     }
 
-    const checkstorage = async () => {
-      let token = await Preferences.get({key:"token"})
-      if(token.value){
-        kioskTKN.set(token.value)
+    const recheckassign = async (value) => {
+      if(!value){
+        return
       }
+
+      else {
+        doassignmentagain.set(false)
+      }
+
+      let token =  (await Preferences.get({key:"token"})).value
+      let sip = (await Preferences.get({key:"serverIP"})).value
+      if(!sip || !token){
+        return
+      }
+
+     
+
+    
+      let assignmentres = await CapacitorHttp.get({
+              url:  sip + "/assignment?kioskToken=" + token,
+              responseType : 'text'
+            })
+
+            if(assignmentres.status == 204){
+              kioskassignment.set([null,null])
+              Preferences.remove({key:"assignment"})
+            }
+            else if(assignmentres.status == 200){
+              kioskassignment.set(assignmentres.data.split("+"))
+              Preferences.set({key:"assignment",value:assignmentres.data})
+            }
+            else if(assignmentres.status == 404 || assignmentres.status == 401 || assignmentres.status == 409){
+              //unenroll
+            }
+    }
+
+    doassignmentagain.subscribe(recheckassign)
+
+    const checkstorage = async () => {
 
       let name = await Preferences.get({key:"name"})
       if(name.value){
@@ -26,6 +61,16 @@
       if(sip.value){
         serverIP.set(sip.value)
       }
+
+      let token = await Preferences.get({key:"token"})
+      if(token.value){
+        kioskTKN.set(token.value)
+      }
+
+
+      doassignmentagain.set(true)
+
+      
     }
 
     const checkdeets = async (value) => {
@@ -41,6 +86,7 @@
       if(!ip.startsWith("https")){
         prefix = "http://"
       }
+
       let code = value[1]
       // @ts-ignore
       let name = document.getElementById("name").value || "Kiosk - " + new Date().getTime()
@@ -96,6 +142,8 @@
             await Preferences.set({key:"token",value:response.data})
             await Preferences.set({key:"name",value:name})
             kioskName.set(name)
+            doassignmentagain.set(true)
+            //setting the kiosk token will trigger the page change, do it last
             kioskTKN.set(response.data)
           }
         }
@@ -109,7 +157,7 @@
 
 
     }
-    deetstore.subscribe(checkdeets)
+    tempinputstore.subscribe(checkdeets)
     checkstorage()
 
 </script>

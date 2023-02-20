@@ -7,5 +7,6 @@
     "CapacitorHttp": {
       "enabled": true
     }
-  }
+  },
+  "showSpinner" : true
 }

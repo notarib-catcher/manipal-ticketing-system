@@ -1,16 +1,16 @@
 <script>
   import { cscanstate } from "./cscan";
   import { CapacitorHttp } from '@capacitor/core';
-  import { serverIP } from "./deets";
+  import { kioskassignment, serverIP } from "./deets";
   import { init } from "svelte/internal";
   import App from "../App.svelte";
-
+  import { Preferences } from "@capacitor/preferences";
+    let srvip = ""
     const updateserverIP = async (value) => {
         srvip = value
     }
 
     serverIP.subscribe(updateserverIP)
-    let srvip
     let errorinres = false
     let validconfirm = false
     let resreason = ""
@@ -20,6 +20,13 @@
     let missingfieldsinvalid = false
     let scannedToken
     let JSONobj
+    let kassign = ""
+
+    const onKioskAssignmentUpdate = async (value) => {
+        kassign = value[1]
+    }
+
+    kioskassignment.subscribe(onKioskAssignmentUpdate)
     const onScanStateUpdate = async (value) => {
         document.getElementById("output").innerText = ""
 
@@ -46,9 +53,10 @@
         document.getElementById("output").innerText = "Querying..."
         try{
             let initres = await CapacitorHttp.get({
-            url: srvip + `/verify?token=${scannedToken}`,
+            url: srvip + `/verify?token=${scannedToken}` + ((kassign)?("&event=" + kassign):""),
+            responseType: 'text'
         }).catch(error => {
-            document.getElementById("output").innerText = "error during HTTP request"
+            document.getElementById("output").innerText = "async error during HTTP request"
         })
 
         // @ts-ignore
@@ -74,7 +82,7 @@
         resreason = initres.data
         }
         catch(error){
-            document.getElementById("output").innerText = "error during HTTP request"
+            document.getElementById("output").innerText = "error during HTTP request" + error
         }
         
 
