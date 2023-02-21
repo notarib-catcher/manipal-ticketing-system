@@ -7,3 +7,5 @@ export const serverIP = writable("")
 export const kioskassignment = writable([null,null])
 export const doassignmentagain = writable(false)
 export const doenrollmentagain = writable(false)
+
+export const notify = writable("")

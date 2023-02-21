@@ -2,7 +2,7 @@
   // @ts-ignore
   import Enroll from "./pages/Enroll.svelte";
   import TicketingPage from "./pages/TicketingPage.svelte";
-  import { kioskTKN, kioskName, serverIP, kioskassignment, doassignmentagain } from "./lib/deets";
+  import { kioskTKN, kioskName, serverIP, kioskassignment, doassignmentagain, notify } from "./lib/deets";
   import Reenroll from "./lib/Reenroll.svelte";
   const linkercheck = async (value) => {
     if(value != null){
@@ -47,6 +47,15 @@
     },2000)
   }
 
+  const updateMiscOut = async (value) => {
+    document.getElementById("misc-out").innerText = value
+    setTimeout(() => {
+      document.getElementById("misc-out").innerText = ""
+    }, 3000);
+  }
+
+  notify.subscribe(updateMiscOut)
+
   kioskTKN.subscribe(linkercheck)
   kioskName.subscribe(namecheck)
   serverIP.subscribe(ipcheck)
@@ -64,7 +73,8 @@
 <div class="overscroll-none">
   <div id = "topbar-wrapper">
     <div class = " fixed top-0 z-10 h-24 bg-orange-900 shadow-2xl text-white font-semibold  w-screen pt-2 flex justify-center text-left items-end align-middle">
-       <div class=" fixed z-20 right-2 top-6">
+      {#if linked} 
+      <div class=" fixed z-20 right-2 top-6">
         <button id="refbtn" on:click={refreshassignbtn} class=" w-fit rounded-md bg-red-800 disabled:bg-red-400 active:p-3 active:m-0 p-2 m-1 active:bg-orange-600 transition-all duration-200">
           <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#ffffff" height="20px" width="20px" version="1.1" id="Capa_1" viewBox="0 0 489.645 489.645" xml:space="preserve">
             <g>
@@ -73,7 +83,8 @@
           </svg>
         </button>
        </div>
-      {#if linked}
+      {/if}
+       {#if linked}
       KIOSK - {name}<br>Bound to {ip.replace("://"," ")}<br>Assigned to {assignedeventname || "No event"}
       {:else}
       MTK - ENROLLMENT PENDING
@@ -84,10 +95,11 @@
     {#if !linked}
       <Enroll />
     {:else}
-    <TicketingPage />
+      <TicketingPage />
     {/if}
   </div>
   <br>
   <Reenroll />
-  <div id= "misc-out" class="w-screen -z-10">(Logs will be displayed below)<br></div>
+  <br>
+  <div id= "misc-out" class="w-screen -z-10  font-semibold text-center text-lg p-4 bg-orange-700 text-white capitalize"></div>
 </div>

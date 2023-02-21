@@ -1,7 +1,7 @@
 <script>
     import { BarcodeScanner, SupportedFormat } from '@capacitor-community/barcode-scanner';
     import { Dialog } from '@capacitor/dialog'
-    import { cscanstate } from './cscan';
+    import { cscanstate, unhidebtn } from './cscan';
 
 const startScan = async () => {
 
@@ -21,7 +21,7 @@ const startScan = async () => {
   document.getElementById("output").hidden = true
   document.getElementById("scannerbars").hidden = false
   document.getElementById("misc-out").hidden = true
-
+  unhidebtn.set(false)
   // Check camera permission
   // This is just a simple example, check out the better checks below
   
@@ -45,7 +45,6 @@ const startScan = async () => {
     document.getElementById("scanbtn").hidden = false
     document.getElementById("output").hidden = false
     document.getElementById("stopscanbtn").hidden = true
-
     scanCompleted(result.content)
   }
 };
@@ -97,9 +96,9 @@ const stopScanClick = async() => {
     <div class="h-[35%] fixed top-0 bg-black w-screen"></div>
     <div class="h-[35%] fixed bottom-0 bg-black w-screen text-white text-center font-semibold">Show ticket QR<br>If QR isn't focusing<br>try centering it,<br>moving closer or farther,<br>or exiting and restarting the scan.<br></div>
   </div>
-  <button id = "scanbtn" class="h-10 w-screen disabled:bg-slate-400 bg-slate-800 text-white" on:click={startScan}>Start Scan</button>
+  <button id = "scanbtn" class="h-10 rounded-lg  translate-x-[5%] z-20 active:bg-orange-400 relative mt-3 w-[90%] disabled:bg-slate-400 bg-slate-800 text-white" on:click={startScan}>Start Scan</button>
   <div class=" fixed left-0 bottom-0 block w-screen">
-    <button id = "stopscanbtn" class="h-10 rounded-lg  translate-x-[5%] z-20 fixed bottom-5 w-[90%] m-auto bg-slate-600 text-white" on:click={stopScanClick} hidden>Exit</button>
+    <button id = "stopscanbtn" class="h-10 rounded-lg  translate-x-[5%] z-20 fixed bottom-5 active:bg-orange-400 w-[90%] m-auto bg-slate-600 text-white" on:click={stopScanClick} hidden>Exit</button>
   </div>
   
 
