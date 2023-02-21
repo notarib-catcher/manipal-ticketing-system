@@ -149,7 +149,7 @@
           }
         }
       catch(error){
-        document.getElementById("status").innerText += "An error occured" + error.toString()
+        document.getElementById("status").innerText += "An error occured " + error.toString()
         // @ts-ignore
         document.getElementById("enrollbtn").disabled = false
         return 

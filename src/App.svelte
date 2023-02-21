@@ -102,4 +102,5 @@
   <Reenroll />
   <br>
   <div id= "misc-out" class="w-screen -z-10  font-semibold text-center text-lg p-4 bg-orange-700 text-white capitalize"></div>
+  <div id = "CREDITS" class=" w-screen fixed bottom-0 z-50 text-xs text-center">MTS/MT-KIOSK by Aaryan D</div>
 </div>
