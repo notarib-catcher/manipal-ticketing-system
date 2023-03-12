@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@capacitor-community/barcode-scanner": "^3.0.1",
+    "@capacitor-community/keep-awake": "^3.0.0",
     "@capacitor/android": "^4.6.3",
     "@capacitor/cli": "^4.6.3",
     "@capacitor/core": "^4.6.3",

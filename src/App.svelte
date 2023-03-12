@@ -4,6 +4,18 @@
   import TicketingPage from "./pages/TicketingPage.svelte";
   import { kioskTKN, kioskName, serverIP, kioskassignment, doassignmentagain, notify } from "./lib/deets";
   import Reenroll from "./lib/Reenroll.svelte";
+
+  import { KeepAwake } from '@capacitor-community/keep-awake';
+
+  const screenAwake = async () => {
+    if(await KeepAwake.isSupported()){
+      await KeepAwake.keepAwake()
+    }
+  }
+
+  screenAwake()
+  
+
   const linkercheck = async (value) => {
     if(value != null){
       linked = true
