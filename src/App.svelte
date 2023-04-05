@@ -4,6 +4,7 @@
   import TicketingPage from "./pages/TicketingPage.svelte";
   import { kioskTKN, kioskName, serverIP, kioskassignment, doassignmentagain, notify } from "./lib/deets";
   import Reenroll from "./lib/Reenroll.svelte";
+  import HALOICON from "./assets/TScroppedWhiteBG.png";
 
   import { KeepAwake } from '@capacitor-community/keep-awake';
 
@@ -84,7 +85,7 @@
 
 <div class="overscroll-none">
   <div id = "topbar-wrapper">
-    <div class = " fixed top-0 z-10 h-24 bg-orange-900 shadow-2xl text-white font-semibold  w-screen pt-2 flex justify-center text-left items-end align-middle">
+    <div class = " fixed top-0 z-10 h-24 bg-[#1e2644] shadow-2xl text-white font-semibold  w-screen pt-2 flex justify-center text-left items-end align-middle">
       {#if linked} 
       <div class=" fixed z-20 right-2 top-6">
         <button id="refbtn" on:click={refreshassignbtn} class=" w-fit rounded-md bg-red-800 disabled:bg-red-400 active:p-3 active:m-0 p-2 m-1 active:bg-orange-600 transition-all duration-200">
@@ -114,5 +115,5 @@
   <Reenroll />
   <br>
   <div id= "misc-out" class="w-screen -z-10  font-semibold text-center text-lg p-4 bg-orange-700 text-white capitalize"></div>
-  <div id = "CREDITS" class=" w-screen fixed bottom-0 z-50 text-xs text-center">MTS/MT-KIOSK by Aaryan D</div>
+  <div id = "CREDITS" class=" w-screen fixed bottom-2 z-50 text-sm  text-left"><div class=" ml-3">MTS/MT-KIOSK by Aaryan D </div><img src= {HALOICON} alt = "logo" class=" fixed bottom-0 right-2 h-[6%]"> </div>
 </div>

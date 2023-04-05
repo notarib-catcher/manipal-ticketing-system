@@ -6,6 +6,16 @@
   "plugins": {
     "CapacitorHttp": {
       "enabled": true
+    },
+    "SplashScreen": {
+      "showSpinner": true,
+      "androidSpinnerStyle": "small",
+      "iosSpinnerStyle": "small",
+      "spinnerColor": "#ffffff",
+      "backgroundColor": "#21252dff",
+      "splashFullScreen": true,
+      "androidScaleType": "CENTER_CROP",
+      "splashImmersive": false
     }
   },
   "showSpinner" : true
