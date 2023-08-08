@@ -19,6 +19,7 @@ const startScan = async () => {
   document.getElementById("scannerprompt").hidden = false
   document.getElementById("scanbtn").hidden = true
   document.getElementById("stopscanbtn").hidden = false
+  document.getElementById("torchbtn").hidden = false
   document.getElementById("output").hidden = true
   document.getElementById("CREDITS").hidden = true
   document.getElementById("scannerbars").hidden = false
@@ -39,6 +40,7 @@ const startScan = async () => {
 
   // if the result has content
   if (result.hasContent) {
+    await BarcodeScanner.disableTorch()
     await BarcodeScanner.stopScan()
     await BarcodeScanner.showBackground()
     document.getElementById("misc-out").hidden = false
@@ -49,6 +51,8 @@ const startScan = async () => {
     document.getElementById("CREDITS").hidden = false
     document.getElementById("output").hidden = false
     document.getElementById("stopscanbtn").hidden = true
+    document.getElementById("torchbtn").hidden = true
+
     scanCompleted(result.content)
   }
 };
@@ -80,7 +84,13 @@ const scanCompleted = async (encoded) => {
 
 }
 
+const torchclick = async () => {
+  BarcodeScanner.toggleTorch()
+}
+
+
 const stopScanClick = async() => {
+  await BarcodeScanner.disableTorch()
   BarcodeScanner.stopScan()
   document.getElementById("misc-out").hidden = false
   document.getElementById("scanbtn").innerText = "Start scan (Previous scan aborted)"
@@ -91,6 +101,8 @@ const stopScanClick = async() => {
   document.getElementById("CREDITS").hidden = false
   document.getElementById("output").hidden = false
   document.getElementById("stopscanbtn").hidden = true
+  document.getElementById("torchbtn").hidden = true
+  
 }
 
 </script>
@@ -104,8 +116,9 @@ const stopScanClick = async() => {
   <div class="w-screen flex items-center justify-center">
     <button id = "scanbtn" class="h-10 rounded-lg z-20 active:bg-orange-400 transition-all duration-200 relative mt-3 w-[90%] disabled:bg-slate-400 bg-slate-800 text-white" on:click={startScan}>Start Scan</button>
   </div>
-  <div class=" fixed left-0 bottom-0 flex w-screen items-center justify-center">
-    <button id = "stopscanbtn" class="h-10 rounded-lg  z-20 fixed bottom-10 transition-all duration-200 border-red-500 border-2  active:bg-orange-400 w-[90%] m-auto bg-slate-600 text-white" on:click={stopScanClick} hidden>Abort</button>
+  <div class=" fixed left-0 bottom-0 flex flex-row w-screen items-center justify-center gap-3">
+    <button id = "torchbtn" class="relative h-10 rounded-lg  z-20 bottom-10 transition-all duration-200 border-red-500 border-2  active:bg-orange-400 w-[40%] bg-slate-600 text-white" on:click={torchclick} hidden>Torch</button>
+    <button id = "stopscanbtn" class="relative h-10 rounded-lg  z-20 bottom-10 transition-all duration-200 border-red-500 border-2  active:bg-orange-400 w-[40%]  bg-slate-600 text-white" on:click={stopScanClick} hidden>Abort</button>
   </div>
   
 
