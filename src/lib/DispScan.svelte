@@ -220,14 +220,17 @@
             [{rescode}]: {resreason.toUpperCase()}
             </div>
         {/if}
-        <div>
-            <b>{JSONobj._id}</b>
-            <ul>
-                <li>Name: {JSONobj.name}</li>
-                <li>Phone: {JSONobj.phone}</li>
-                <li>Type: {JSONobj.type}</li>
-            </ul>
+        <div class=" w-screen flex items-center mt-2 justify-center left-0">
+            <div class=" text-white font-light h-fit w-fit p-2 bg-black bg-opacity-30 rounded-lg select-text ">
+                <div class=" font-semibold">{JSONobj._id}</div>
+                <ul>
+                    <li>Name: {JSONobj.name}</li>
+                    <li>Phone: {JSONobj.phone}</li>
+                    <li>Type: {JSONobj.type}</li>
+                </ul>
+            </div>
         </div>
+        
     {/if}
     {#if okaytomark}
         <div id = "btnwrap">

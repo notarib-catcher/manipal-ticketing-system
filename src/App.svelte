@@ -98,7 +98,9 @@
        </div>
       {/if}
        {#if linked}
-      KIOSK - {name}<br>Bound to {ip.replace("://"," ")}<br>Assigned to {assignedeventname || "No event"}
+      <div class=" pb-2">
+        KIOSK - {name}<br>Bound to {ip.replace("://"," ")}<br>Assigned to {assignedeventname || "No event"}
+      </div>
       {:else}
       MTK - ENROLLMENT PENDING
       {/if}
@@ -114,6 +116,6 @@
   <br>
   <Reenroll />
   <br>
-  <div id= "misc-out" class="w-screen -z-10  font-semibold text-center text-lg p-4 bg-orange-700 text-white capitalize"></div>
+  <div id= "misc-out" class="w-screen fixed -z-10  font-semibold text-right text-lg p-4 bg-orange-700 bottom-0 bg-opacity-30 text-white capitalize"></div>
   <div id = "CREDITS" class=" w-screen fixed bottom-2 z-50 text-sm  text-left"><div class=" ml-3">MTS/MT-KIOSK by Aaryan D </div></div>
 </div>

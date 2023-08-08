@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+button {
+    user-select: none;
+}
+
+html{
+
+    background: #333535;
+
+}

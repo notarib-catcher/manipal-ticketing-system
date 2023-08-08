@@ -16,6 +16,9 @@
       "splashFullScreen": true,
       "androidScaleType": "CENTER_CROP",
       "splashImmersive": false
+    },
+    "PrivacyScreen": {
+      "enable": true
     }
   },
   "showSpinner" : true

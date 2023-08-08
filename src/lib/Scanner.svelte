@@ -16,10 +16,13 @@ const startScan = async () => {
     await BarcodeScanner.openAppSettings();
     return
   }
+  document.getElementById("scannerprompt").hidden = false
   document.getElementById("scanbtn").hidden = true
   document.getElementById("stopscanbtn").hidden = false
   document.getElementById("output").hidden = true
+  document.getElementById("CREDITS").hidden = true
   document.getElementById("scannerbars").hidden = false
+  document.getElementById("scannerbox").hidden = false
   document.getElementById("misc-out").hidden = true
   unhidebtn.set(false)
   // Check camera permission
@@ -39,10 +42,11 @@ const startScan = async () => {
     await BarcodeScanner.stopScan()
     await BarcodeScanner.showBackground()
     document.getElementById("misc-out").hidden = false
-
+    document.getElementById("scannerprompt").hidden = true
     document.getElementById("scannerbars").hidden = true
-
+    document.getElementById("scannerbox").hidden = true
     document.getElementById("scanbtn").hidden = false
+    document.getElementById("CREDITS").hidden = false
     document.getElementById("output").hidden = false
     document.getElementById("stopscanbtn").hidden = true
     scanCompleted(result.content)
@@ -81,7 +85,10 @@ const stopScanClick = async() => {
   document.getElementById("misc-out").hidden = false
   document.getElementById("scanbtn").innerText = "Start scan (Previous scan aborted)"
   document.getElementById("scannerbars").hidden = true
+  document.getElementById("scannerbox").hidden = true
+  document.getElementById("scannerprompt").hidden = true
   document.getElementById("scanbtn").hidden = false
+  document.getElementById("CREDITS").hidden = false
   document.getElementById("output").hidden = false
   document.getElementById("stopscanbtn").hidden = true
 }
@@ -90,16 +97,34 @@ const stopScanClick = async() => {
 
 <div>
   <div id = "output" class=" bg-green-300 w-screen overflow-x-visible"></div>
-  <div id = "scannerbars" class="z-0" hidden>
-    <div class="w-[15%] fixed left-0 bg-black h-screen"></div>
-    <div class="w-[15%] fixed right-0 bg-black h-screen"></div>
-    <div class="h-[35%] fixed top-0 bg-black w-screen"></div>
-    <div class="h-[35%] fixed bottom-0 bg-black w-screen text-white text-center font-semibold">Show ticket QR<br>If QR isn't focusing<br>try centering it,<br>moving closer or farther,<br>or exiting and restarting the scan.<br></div>
+  <div id = "scannerbars" class="z-0 fixed top-0 left-0 h-screen w-screen overflow-hidden flex items-center justify-center" hidden>
+    <div id="scannerbox" class=" w-[70%] h-[40%] border-4 screen-overlay border-blue-500 opacity-25" hidden/>
+    <div  class=" fixed bottom-0 -translate-y-[100px] flex items-center justify-center w-screen text-white text-center font-semibold pointer-events-none" ><div hidden id="scannerprompt" class="  p-2 bg-black rounded-lg bg-opacity-20 font-light">Scan ticket QR<br><div class="text-xs font-semibold">If you face issues with autofocus, restart the scan.</div></div></div>
   </div>
-  <button id = "scanbtn" class="h-10 rounded-lg  translate-x-[5%] z-20 active:bg-orange-400 relative mt-3 w-[90%] disabled:bg-slate-400 bg-slate-800 text-white" on:click={startScan}>Start Scan</button>
-  <div class=" fixed left-0 bottom-0 block w-screen">
-    <button id = "stopscanbtn" class="h-10 rounded-lg  translate-x-[5%] z-20 fixed bottom-10 active:bg-orange-400 w-[90%] m-auto bg-slate-600 text-white" on:click={stopScanClick} hidden>Exit</button>
+  <div class="w-screen flex items-center justify-center">
+    <button id = "scanbtn" class="h-10 rounded-lg z-20 active:bg-orange-400 transition-all duration-200 relative mt-3 w-[90%] disabled:bg-slate-400 bg-slate-800 text-white" on:click={startScan}>Start Scan</button>
+  </div>
+  <div class=" fixed left-0 bottom-0 flex w-screen items-center justify-center">
+    <button id = "stopscanbtn" class="h-10 rounded-lg  z-20 fixed bottom-10 transition-all duration-200 border-red-500 border-2  active:bg-orange-400 w-[90%] m-auto bg-slate-600 text-white" on:click={stopScanClick} hidden>Abort</button>
   </div>
   
 
 </div>
+
+<style>
+  @keyframes pan-overlay {
+  from {
+    background-position: 0% 0%;
+  }
+  
+  to {
+    background-position: 0% -100%;
+  }
+}
+.screen-overlay {
+
+  background-image: linear-gradient( rgba(11, 126, 137, 0.909), rgba(11, 126, 137, 0.384), transparent 3px, transparent 9px);
+  background-size: 100% 9px;
+  animation: pan-overlay 22s infinite linear;
+}
+</style>
