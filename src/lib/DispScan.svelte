@@ -233,8 +233,8 @@
         
     {/if}
     {#if okaytomark}
-        <div id = "btnwrap">
-            <button id = "markbtn" class="h-10 rounded-lg  translate-x-[5%] z-20 active:bg-orange-400 relative mt-3 w-[90%] disabled:bg-slate-400 bg-slate-800 text-white" on:click={onMarkbtn}>Mark Attendance</button>
+        <div id = "btnwrap" class=" flex w-screen items-center justify-center">
+            <button id = "markbtn" class="h-10 rounded-lg z-20 active:bg-orange-400 relative mt-3 w-[90%] disabled:bg-slate-400 bg-slate-800 text-white" on:click={onMarkbtn}>Mark Attendance</button>
         </div>
     {/if}
 </div>
