@@ -98,7 +98,7 @@ const stopScanClick = async() => {
   </div>
   <button id = "scanbtn" class="h-10 rounded-lg  translate-x-[5%] z-20 active:bg-orange-400 relative mt-3 w-[90%] disabled:bg-slate-400 bg-slate-800 text-white" on:click={startScan}>Start Scan</button>
   <div class=" fixed left-0 bottom-0 block w-screen">
-    <button id = "stopscanbtn" class="h-10 rounded-lg  translate-x-[5%] z-20 fixed bottom-5 active:bg-orange-400 w-[90%] m-auto bg-slate-600 text-white" on:click={stopScanClick} hidden>Exit</button>
+    <button id = "stopscanbtn" class="h-10 rounded-lg  translate-x-[5%] z-20 fixed bottom-10 active:bg-orange-400 w-[90%] m-auto bg-slate-600 text-white" on:click={stopScanClick} hidden>Exit</button>
   </div>
   
 

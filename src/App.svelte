@@ -115,5 +115,5 @@
   <Reenroll />
   <br>
   <div id= "misc-out" class="w-screen -z-10  font-semibold text-center text-lg p-4 bg-orange-700 text-white capitalize"></div>
-  <div id = "CREDITS" class=" w-screen fixed bottom-2 z-50 text-sm  text-left"><div class=" ml-3">MTS/MT-KIOSK by Aaryan D </div><img src= {HALOICON} alt = "logo" class=" fixed bottom-0 right-2 h-[6%]"> </div>
+  <div id = "CREDITS" class=" w-screen fixed bottom-2 z-50 text-sm  text-left"><div class=" ml-3">MTS/MT-KIOSK by Aaryan D </div></div>
 </div>
