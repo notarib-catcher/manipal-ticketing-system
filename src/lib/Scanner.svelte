@@ -138,6 +138,6 @@ const stopScanClick = async() => {
 
   background-image: linear-gradient( rgba(11, 126, 137, 0.909), rgba(11, 126, 137, 0.384), transparent 3px, transparent 9px);
   background-size: 100% 9px;
-  animation: pan-overlay 22s infinite linear;
+  animation: pan-overlay 10s infinite linear;
 }
 </style>
