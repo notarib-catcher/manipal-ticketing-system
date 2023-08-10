@@ -118,7 +118,7 @@
             return
         }
         if(value[1] == "staff"){
-            unhidebtn.set(true)
+            unhidebtn.set(false)
             // @ts-ignore
             document.getElementById("markbtn").innerText = "STAFF"
             return
@@ -226,7 +226,7 @@
                 <ul>
                     <li>Name: {JSONobj.name}</li>
                     <li>Phone: {JSONobj.phone}</li>
-                    <li>Type: {JSONobj.type}</li>
+                    <li>Type: {JSONobj.type?.replaceAll("!STAFF!","Staff member").replaceAll("!ALL!","Full access")}</li>
                 </ul>
             </div>
         </div>
