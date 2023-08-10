@@ -2,7 +2,8 @@
   import { cscanstate, cverifiedstate, unhidebtn } from "./cscan";
   import { CapacitorHttp } from '@capacitor/core';
   import { kioskassignment, serverIP, kioskTKN, doassignmentagain, notify } from "./deets";
-    let srvip = ""
+  import { Dialog } from '@capacitor/dialog'  
+  let srvip = ""
     const updateserverIP = async (value) => {
         srvip = value
     }
@@ -79,6 +80,7 @@
                 if(initres.data.includes("staff")){
                     //disable btn
                     cverifiedstate.set([null,"staff"])
+                    Dialog.alert({title:"Verified Staff Pass", message:"Allow them to proceed", buttonTitle:"Close"})
                 }
                 else{
                     cverifiedstate.set([scannedToken,"verified"])
@@ -94,6 +96,7 @@
             resreason = initres.data
         }
         catch(error){
+            Dialog.alert({message:"Please check your internet connection", title:"Error during server query", buttonTitle:"Close"})
             document.getElementById("output").innerHTML = "<div class = \"p-2\">Unable to connect! <br>[ERR_INET_DOWN]</div>"
             cverifiedstate.set([null,"fail"])
         }
