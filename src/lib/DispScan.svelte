@@ -94,7 +94,7 @@
             resreason = initres.data
         }
         catch(error){
-            document.getElementById("output").innerText = "Unable to query (G_ERR)"
+            document.getElementById("output").innerHTML = "<div class = \"p-2\">Unable to connect! <br>[ERR_INET_DOWN]</div>"
             cverifiedstate.set([null,"fail"])
         }
         
@@ -221,7 +221,7 @@
             </div>
         {/if}
         <div class=" w-screen flex items-center mt-2 justify-center left-0">
-            <div class=" text-white font-light h-fit w-fit p-2 bg-black bg-opacity-30 rounded-lg select-text ">
+            <div class=" text-white font-light h-fit mt-2 w-fit p-2 bg-black bg-opacity-30 rounded-lg select-text ">
                 <div class=" font-semibold">{JSONobj._id}</div>
                 <ul>
                     <li>Name: {JSONobj.name}</li>
