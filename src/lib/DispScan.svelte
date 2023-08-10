@@ -1,4 +1,6 @@
 <script>
+  import { ZoomPlugin } from 'capacitor-zoom-android'
+  ZoomPlugin.disableZoom()
   import { cscanstate, cverifiedstate, unhidebtn } from "./cscan";
   import { CapacitorHttp } from '@capacitor/core';
   import { kioskassignment, serverIP, kioskTKN, doassignmentagain, notify } from "./deets";

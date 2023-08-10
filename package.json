@@ -26,6 +26,7 @@
     "@capacitor/dialog": "^4.1.0",
     "@capacitor/preferences": "^4.0.2",
     "@capacitor/splash-screen": "^4.2.0",
+    "capacitor-zoom-android": "^5.0.0",
     "cordova-res": "^0.15.4"
   }
 }
