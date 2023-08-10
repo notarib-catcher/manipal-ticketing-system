@@ -108,7 +108,7 @@ const stopScanClick = async() => {
 </script>
 
 <div>
-  <div id = "output" class=" relative bg-black bg-opacity-30 w-[90%] mt-3 rounded-lg mx-auto overflow-x-visible text-white text-light text-center">test</div>
+  <div id = "output" class=" relative bg-black bg-opacity-30 w-[90%] mt-3 rounded-lg mx-auto overflow-x-visible text-white text-light text-center"></div>
   <div id = "scannerbars" class="z-0 fixed top-0 left-0 h-screen w-screen overflow-hidden flex items-center justify-center" hidden>
     <div id="scannerbox" class=" w-[70%] h-[40%] border-4 screen-overlay border-blue-500 opacity-25" hidden/>
     <div  class=" fixed bottom-0 -translate-y-[100px] flex items-center justify-center w-screen text-white text-center font-semibold pointer-events-none" ><div hidden id="scannerprompt" class="  p-2 bg-black rounded-lg bg-opacity-20 font-light">Scan ticket QR<br><div class="text-xs font-semibold">If you face issues with autofocus, restart the scan.</div></div></div>
