@@ -60,12 +60,12 @@
             url: srvip + `/verify?token=${scannedToken}` + ((kassign)?("&event=" + kassign):""),
             responseType: 'text'
             }).catch(error => {
-                document.getElementById("output").innerText = "async error during HTTP request"
+                document.getElementById("output").innerText = "An error occured (ASYHTREQ)"
             })
 
             // @ts-ignore
             if(!initres.data){
-                document.getElementById("output").innerText = "error during HTTP request"
+                document.getElementById("output").innerText = "An error occured (HTREQ)"
             }
 
             document.getElementById("output").innerText = ""
@@ -94,7 +94,7 @@
             resreason = initres.data
         }
         catch(error){
-            document.getElementById("output").innerText = "error during HTTP request" + error
+            document.getElementById("output").innerText = "Unable to query (G_ERR)"
             cverifiedstate.set([null,"fail"])
         }
         
